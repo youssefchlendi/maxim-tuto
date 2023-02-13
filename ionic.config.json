@@ -1,0 +1,7 @@
+{
+  "name": "maxim-tuto",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
