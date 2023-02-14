@@ -1,9 +1,9 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.youssefchlendi.memories',
-  appName: 'Memories',
-  webDir: 'public',
+  appId: 'io.ionic.starter',
+  appName: 'maxim-tuto',
+  webDir: 'dist',
   bundledWebRuntime: false
 };
 
