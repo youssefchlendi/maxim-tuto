@@ -1,38 +1,24 @@
 <template>
-	<ion-page>
-		<ion-header>
-			<ion-toolbar>
-				<ion-title>Memories</ion-title>
-			</ion-toolbar>
-		</ion-header>
-		<ion-content>
-			<ion-list>
-				<ion-item>Max</ion-item>
-				<ion-item>Manuel</ion-item>
-				<ion-item>Julie</ion-item>
-				<ion-item>George</ion-item>
-			</ion-list>
-		</ion-content>
-	</ion-page>
+	<base-layout page-title="Memories">
+		<memory-list :memories="memoryStore.memories"/>
+	</base-layout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent,IonList,IonItem } from "@ionic/vue";
+import { useMemoryStore } from '@/store/memories.store';
+import MemoryList from '@/components/memories/MemoryList.vue';
 export default defineComponent({
-	components:{
-		IonPage,
-		IonHeader,
-		IonToolbar,
-		IonTitle,
-		IonContent,
-		IonList,
-		IonItem
+	components: {
+		MemoryList
 	},
-	setup () {
-		
-
-		return {}
+	setup(){
+		const memoryStore = useMemoryStore();
+		return { memoryStore }
+	},
+	data(){
+		return {
+		}
 	}
 })
 </script>
