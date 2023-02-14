@@ -6,16 +6,18 @@
 			</ion-thumbnail>
 			<ion-label :router-link="`/memories/${memory.id}`">{{ memory.title }}</ion-label>
 		</ion-item>
-			<ion-item-options>
-				<ion-item-option @click="editMemory(memory.id)" color="warning">Update <ion-icon :icon="pencil" /></ion-item-option>
-				<ion-item-option @click="deleteMemory(memory.id)" color="danger">Delete <ion-icon :icon="trash" /></ion-item-option>
-			</ion-item-options>
+		<ion-item-options>
+			<ion-item-option @click="editMemory(memory.id)" color="warning">Update <ion-icon
+					:icon="pencil" /></ion-item-option>
+			<ion-item-option @click="deleteMemory(memory.id)" color="danger">Delete <ion-icon
+					:icon="trash" /></ion-item-option>
+		</ion-item-options>
 	</ion-item-sliding>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { IonItem, IonImg, IonThumbnail, IonLabel, IonItemSliding,IonItemOption,IonItemOptions, actionSheetController, IonIcon } from "@ionic/vue";
+import { IonItem, IonImg, IonThumbnail, IonLabel, IonItemSliding, IonItemOption, IonItemOptions, actionSheetController, IonIcon, toastController } from "@ionic/vue";
 import { Memory } from '@/models/memory.model';
 import { trash, pencil, close } from 'ionicons/icons';
 export default defineComponent({
@@ -38,7 +40,7 @@ export default defineComponent({
 	setup(_, { emit }) {
 		const itemRef = ref();
 
-		const deleteMemory =  async (id: string) => {
+		const deleteMemory = async (id: string) => {
 			const actionSheet = await actionSheetController.create({
 				header: 'Are you sure?',
 				buttons: [
@@ -50,6 +52,13 @@ export default defineComponent({
 						handler: () => {
 							itemRef.value.$el.close()
 							emit('delete-memory', id);
+							toastController.create({
+								message: 'Memory deleted',
+								duration: 2000,
+								color: 'danger'
+							}).then(toast => {
+								toast.present();
+							})
 						}
 					},
 					{
@@ -59,6 +68,12 @@ export default defineComponent({
 						role: 'cancel',
 						handler: () => {
 							itemRef.value.$el.close()
+							toastController.create({
+								message: 'action cancelled',
+								duration: 2000,
+							}).then(toast => {
+								toast.present();
+							})
 						}
 					}
 				]
@@ -71,7 +86,7 @@ export default defineComponent({
 			emit('update-memory', id);
 		}
 
-		return { 
+		return {
 			deleteMemory,
 			trash,
 			pencil,
@@ -80,9 +95,7 @@ export default defineComponent({
 		}
 	},
 	emits: ['delete-memory', 'update-memory']
-	,mounted() {
-		console.log(this.$refs.itemRef);
-	}
+
 
 })
 </script>
