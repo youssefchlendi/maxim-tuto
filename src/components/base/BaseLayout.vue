@@ -8,6 +8,10 @@
 					<ion-back-button :default-href="pageDefaultBackLink">
 					</ion-back-button>
 				</ion-buttons>
+
+				<ion-buttons slot="end">
+					<slot name="actions-end" />
+				</ion-buttons>
 			</ion-toolbar>
 		</ion-header>
 		<ion-content>

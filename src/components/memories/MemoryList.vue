@@ -1,6 +1,6 @@
 <template>
 	<ion-list>
-		<memory-list-item v-for="memory in memories" :key="memory.id" :memory="memory" />
+		<memory-list-item @delete-memory="deleteMemory" @update-memory="updateMemory" v-for="memory in memories" :key="memory.id" :memory="memory" />
 	</ion-list>
 </template>
 
@@ -20,6 +20,15 @@ export default defineComponent({
 			required: true
 		}
 	},
+	methods: {
+		deleteMemory(id: string) {
+			this.$emit('delete-memory', id);
+		},
+		updateMemory(id: string) {
+			this.$emit('update-memory', id);
+		}
+	},
+	emits: ['delete-memory', 'update-memory']
 })
 </script>
 

@@ -27,9 +27,39 @@ export const useMemoryStore = defineStore('memories',() => {
 		return memories.value.findIndex( (memory) => memory.id === id ) == -1 ? null : memories.value.find( (memory) => memory.id === id ) as Memory;
 	}
 
+	const deleteMemory = ( id: string ) => {
+		const index = memories.value.findIndex( (memory) => memory.id === id );
+		if ( index != -1 ) {
+			memories.value.splice(index, 1);
+		}
+	}
+
+	const updateMemory = (memory: Memory ) => {
+		const index = memories.value.findIndex( (mem) => mem.id === memory.id );
+		if ( index != -1 ) {
+			memories.value[index] = memory;
+		}
+	}
+
+
+
+	const addMemory = ( memory: Memory ) => {
+		const newMemory = {
+			id: Math.random().toString(),
+			title: memory.title,
+			description: memory.description,
+			image: memory.image,
+		}
+		
+		memories.value.push(newMemory);
+	}
+
 	return {
 		memories,
-		getOneMemory
+		getOneMemory,
+		addMemory,
+		deleteMemory,
+		updateMemory
 	}
 
 })
