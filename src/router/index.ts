@@ -9,10 +9,12 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
 	path: '/memories',
+	name: 'Memories',
 	component: MemoriesPage
   },
   {
 	path: '/memories/:id',
+	name: 'MemoryDetails',
 	component: () => import('@/pages/MemoryDetails.vue')
   },
   {

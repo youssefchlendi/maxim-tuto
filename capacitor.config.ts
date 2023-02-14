@@ -3,7 +3,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 const config: CapacitorConfig = {
   appId: 'com.youssefchlendi.memories',
   appName: 'Memories',
-  webDir: 'public',
+  webDir: 'dist',
   bundledWebRuntime: false
 };
 
